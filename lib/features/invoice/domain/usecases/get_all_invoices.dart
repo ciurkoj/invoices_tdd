@@ -10,7 +10,7 @@ class GetAllInvoices implements UseCase<List<Invoice>, NoParams>{
   GetAllInvoices(this.repository);
 
   @override
-  Future<Either<Failure, List<Invoice>>> call(NoParams params) async {
+  Future<Either<Failure, List<Invoice>>?> call(NoParams params) async {
     return await repository.getAllInvoices();
   }
 

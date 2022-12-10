@@ -10,16 +10,18 @@ class GetConcreteInvoice extends UseCase<Invoice, Params> {
 
   GetConcreteInvoice(this.repository);
 
+
   @override
-  Future<Either<Failure, Invoice>> call(Params params) async {
-    return await repository.getInvoice(params.invoiceId);
+  Future<Either<Failure, Invoice>?> call(Params params) async {
+    return await repository.getConcreteInvoice(params.invoiceId);
   }
+
 }
 
 class Params extends Equatable {
   final String invoiceId;
 
-  const Params({required this.invoiceId}) : super();
+  const Params({required this.invoiceId});
 
   @override
   List<Object?> get props => [invoiceId];

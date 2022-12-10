@@ -4,7 +4,7 @@ class Invoice extends Equatable {
   final String invoiceId;
   final int vat;
 
-  const Invoice({required this.invoiceId, required this.vat}) : super();
+  const Invoice({required this.invoiceId, required this.vat});
 
   @override
   List<Object?> get props => [invoiceId, vat];
