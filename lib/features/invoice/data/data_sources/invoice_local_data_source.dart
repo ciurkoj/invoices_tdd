@@ -23,12 +23,14 @@ const CACHED_LAST_INVOICE = 'CACHED_LAST_INVOICE';
 const CACHED_INVOICES = 'CACHED_INVOICES';
 
 class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
-  late final SharedPreferences sharedPreferences;
+  final SharedPreferences sharedPreferences;
 
   InvoiceLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
   Future<void>? cacheInvoice(InvoiceModel invoiceModelToCache) {
+    var x = sharedPreferences.setString("ASDF", "asdf");
+    x;
     return sharedPreferences.setString(
         CACHED_LAST_INVOICE, json.encode(invoiceModelToCache.toJson()));
   }
@@ -53,7 +55,7 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
   Future<List<InvoiceModel>>? getAllCachedInvoices() {
     final jsonString = sharedPreferences.getString(CACHED_INVOICES);
     if (jsonString != null) {
-      return Future.value(json.decode(jsonString).map<InvoiceModel>((json) => InvoiceModel.fromJson(json)).toList());
+      return Future.value(json.decode(jsonString)[CACHED_INVOICES].map<InvoiceModel>((json) => InvoiceModel.fromJson(json)).toList());
     } else {
       throw CacheException();
     }
