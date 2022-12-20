@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:invoices_tdd/core/platform/network_info.dart' as _i3;
+import 'package:invoices_tdd/core/network/network_info.dart' as _i3;
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_data_source.dart'
     as _i6;
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart'

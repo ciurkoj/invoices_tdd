@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:invoices_tdd/core/error/exceptions.dart';
 import 'package:invoices_tdd/core/error/failure.dart';
-import 'package:invoices_tdd/core/platform/network_info.dart';
+import 'package:invoices_tdd/core/network/network_info.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_data_source.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart';
 import 'package:invoices_tdd/features/invoice/data/models/invoice_model.dart';
