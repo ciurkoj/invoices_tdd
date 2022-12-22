@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:invoices_tdd/core/error/failure.dart';
 
 class InputConverter {
-  Either<Failure, int> stringToUnsignedInteger(String str) {
+  Either<Failure, String> inputToString(String str) {
     try {
-      final integer = int.parse(str);
-      if (integer < 0) throw const FormatException();
-      return Right(integer);
+      final string = str.toString();
+      if (string.runtimeType != String) throw const FormatException();
+      return Right(string);
     } on FormatException {
       return Left(InvalidInputFailure());
     }

@@ -13,3 +13,10 @@ class GetInvoiceForConcreteInvoiceId extends InvoicesEvent{
 
   const GetInvoiceForConcreteInvoiceId(this.invoiceId);
 }
+
+class GetAllInvoicesEvent extends InvoicesEvent{
+  final List<Invoice> invoices;
+  List<Invoice> get getInvoices => invoices;
+
+  const GetAllInvoicesEvent(this.invoices);
+}

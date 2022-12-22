@@ -12,7 +12,7 @@ class Empty extends InvoicesState {}
 class Loading extends InvoicesState {}
 
 class Loaded extends InvoicesState {
-  final Invoice invoice;
+  final List<Invoice> invoice;
 
   const Loaded({required this.invoice}) : super();
 }

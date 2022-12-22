@@ -16,34 +16,11 @@ void main() {
         // arrange
         const str = '123';
         // act
-        final result = inputConverter.stringToUnsignedInteger(str);
+        final result = inputConverter.inputToString(str);
         // assert
-        expect(result, const Right(123));
+        expect(result, const Right("123"));
       },
     );
 
-    test(
-      'should return a Failure when the string is not an integer',
-      () async {
-        // arrange
-        const str = 'abc';
-        // act
-        final result = inputConverter.stringToUnsignedInteger(str);
-        // assert
-        expect(result, Left(InvalidInputFailure()));
-      },
-    );
-
-    test(
-      'should return a Failure when the string is a negative integer',
-      () async {
-        // arrange
-        const str = '-123';
-        // act
-        final result = inputConverter.stringToUnsignedInteger(str);
-        // assert
-        expect(result, Left(InvalidInputFailure()));
-      },
-    );
   });
 }
