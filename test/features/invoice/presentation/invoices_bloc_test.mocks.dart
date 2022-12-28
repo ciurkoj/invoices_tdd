@@ -7,14 +7,14 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:invoices_tdd/core/error/failure.dart' as _i6;
-import 'package:invoices_tdd/core/usecases/use_case.dart' as _i9;
+import 'package:invoices_tdd/core/usecases/use_case.dart' as _i8;
 import 'package:invoices_tdd/core/util/input_converter.dart' as _i10;
 import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart'
     as _i7;
 import 'package:invoices_tdd/features/invoice/domain/repositories/invoice_repository.dart'
     as _i2;
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_all_invoices.dart'
-    as _i8;
+    as _i9;
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_concrete_invoice.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
@@ -70,7 +70,7 @@ class MockGetConcreteInvoice extends _i1.Mock
       ) as _i2.InvoiceRepository);
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i7.InvoiceEntity>?> call(
-          _i4.Params? params) =>
+          _i8.Params? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
@@ -84,7 +84,7 @@ class MockGetConcreteInvoice extends _i1.Mock
 /// A class which mocks [GetAllInvoices].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetAllInvoices extends _i1.Mock implements _i8.GetAllInvoices {
+class MockGetAllInvoices extends _i1.Mock implements _i9.GetAllInvoices {
   MockGetAllInvoices() {
     _i1.throwOnMissingStub(this);
   }
@@ -99,7 +99,7 @@ class MockGetAllInvoices extends _i1.Mock implements _i8.GetAllInvoices {
       ) as _i2.InvoiceRepository);
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.InvoiceEntity>>?> call(
-          _i9.NoParams? params) =>
+          _i8.NoParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
