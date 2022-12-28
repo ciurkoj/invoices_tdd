@@ -3,6 +3,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:invoices_tdd/core/error/failure.dart';
 import 'package:invoices_tdd/core/usecases/use_case.dart';
 import 'package:invoices_tdd/core/util/input_converter.dart';
@@ -39,26 +40,28 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
       }, (invoiceId) async* {
         emit(Loading());
         final failureOrInvoice = await getConcreteInvoice(Params(invoiceId: invoiceId));
-        yield* _eitherLoadedOrErrorState(failureOrInvoice!);
+        yield* eitherLoadedOrErrorState(failureOrInvoice!);
       });
     });
     on<GetAllInvoicesEvent>((event, emit) async {
       emit(Loading());
       final failureOrTrivia = await getAllInvoices(NoParams());
       failureOrTrivia!.fold((failure) {
-        emit(Error(message: _mapFailureToMessage(failure)));
+        emit(Error(message: mapFailureToMessage(failure)));
       }, (invoices) {
         emit(Loaded( invoice:invoices ));
       });
     });
   }
 
-  Stream<InvoicesState> _eitherLoadedOrErrorState(Either<Failure, InvoiceEntity> failureOrInvoice) async* {
+  @visibleForTesting
+  Stream<InvoicesState> eitherLoadedOrErrorState(Either<Failure, InvoiceEntity> failureOrInvoice) async* {
     yield failureOrInvoice.fold(
-        (failure) => Error(message: _mapFailureToMessage(failure)), (invoice) => Loaded(invoice: [invoice]));
+        (failure) => Error(message: mapFailureToMessage(failure)), (invoice) => Loaded(invoice: [invoice]));
   }
 
-  String _mapFailureToMessage(Failure failure) {
+  @visibleForTesting
+  String mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
         return SERVER_FAILURE_MESSAGE;

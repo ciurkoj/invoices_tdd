@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:invoices_tdd/core/error/failure.dart';
 import 'package:invoices_tdd/core/usecases/use_case.dart';
 import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
@@ -18,13 +17,4 @@ class GetConcreteInvoice extends UseCase<InvoiceEntity, Params> {
 
 }
 
-class Params extends Equatable {
-  final String invoiceId;
 
-  const Params({required this.invoiceId});
-
-  @override
-  List<String> get props => [invoiceId];
-
-  String get getInvoiceId => invoiceId;
-}

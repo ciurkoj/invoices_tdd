@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:invoices_tdd/core/usecases/use_case.dart';
 import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 import 'package:invoices_tdd/features/invoice/domain/repositories/invoice_repository.dart';
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_concrete_invoice.dart';

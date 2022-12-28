@@ -10,3 +10,14 @@ class NoParams extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class Params extends Equatable {
+  final String invoiceId;
+
+  const Params({required this.invoiceId});
+
+  @override
+  List<String> get props => [invoiceId];
+
+  String get getInvoiceId => invoiceId;
+}

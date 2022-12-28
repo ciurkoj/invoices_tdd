@@ -45,6 +45,7 @@ dependencies:
   data_connection_checker_nulls: ^0.0.2
   http: ^0.13.5
   bloc: ^8.1.0
+  bloc_test: ^9.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
