@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:invoices_tdd/core/usecases/use_case.dart';
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 import 'package:invoices_tdd/features/invoice/domain/repositories/invoice_repository.dart';
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_all_invoices.dart';
 import 'package:mockito/annotations.dart';
@@ -13,12 +13,12 @@ import 'get_all_invoices_test.mocks.dart';
 void main() {
   late MockInvoiceRepository mockNumberTriviaRepository;
   late GetAllInvoices usecase;
-  late List<Invoice> tNumberTrivia;
+  late List<InvoiceEntity> tNumberTrivia;
 
   setUp(() {
     mockNumberTriviaRepository = MockInvoiceRepository();
     usecase = GetAllInvoices(mockNumberTriviaRepository);
-    tNumberTrivia = [const Invoice(vat: 0, invoiceId: '1'), const Invoice(vat: 0, invoiceId: '1')];
+    tNumberTrivia = [const InvoiceEntity(vat: 0, invoiceId: '1'), const InvoiceEntity(vat: 0, invoiceId: '1')];
   });
 
   test(

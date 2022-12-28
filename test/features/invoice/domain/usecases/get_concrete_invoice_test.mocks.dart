@@ -7,7 +7,7 @@ import 'dart:async' as _i3;
 
 import 'package:dartz/dartz.dart' as _i4;
 import 'package:invoices_tdd/core/error/failure.dart' as _i5;
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart'
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart'
     as _i6;
 import 'package:invoices_tdd/features/invoice/domain/repositories/invoice_repository.dart'
     as _i2;
@@ -33,10 +33,10 @@ class MockInvoiceRepository extends _i1.Mock implements _i2.InvoiceRepository {
   }
 
   @override
-  _i3.Future<_i4.Either<_i5.Failure, _i6.Invoice>>? getConcreteInvoice(
+  _i3.Future<_i4.Either<_i5.Failure, _i6.InvoiceEntity>>? getConcreteInvoice(
           String? invoiceId) =>
       (super.noSuchMethod(Invocation.method(
         #getConcreteInvoice,
         [invoiceId],
-      )) as _i3.Future<_i4.Either<_i5.Failure, _i6.Invoice>>?);
+      )) as _i3.Future<_i4.Either<_i5.Failure, _i6.InvoiceEntity>>?);
 }

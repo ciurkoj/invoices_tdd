@@ -7,7 +7,7 @@ import 'dart:async' as _i3;
 
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_data_source.dart'
     as _i4;
-import 'package:invoices_tdd/features/invoice/data/models/invoice_model.dart'
+import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart'
     as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:shared_preferences/shared_preferences.dart' as _i2;
@@ -217,7 +217,7 @@ class MockInvoiceLocalDataSourceImpl extends _i1.Mock
         ),
       ) as _i2.SharedPreferences);
   @override
-  _i3.Future<void>? cacheInvoice(_i5.InvoiceModel? invoiceModelToCache) =>
+  _i3.Future<void>? cacheInvoice(_i5.InvoiceDTO? invoiceModelToCache) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheInvoice,
@@ -226,8 +226,7 @@ class MockInvoiceLocalDataSourceImpl extends _i1.Mock
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>?);
   @override
-  _i3.Future<void>? cacheInvoiceList(
-          List<_i5.InvoiceModel>? invoiceModelList) =>
+  _i3.Future<void>? cacheInvoiceList(List<_i5.InvoiceDTO>? invoiceModelList) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheInvoiceList,

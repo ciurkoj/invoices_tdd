@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 import 'package:invoices_tdd/features/invoice/domain/repositories/invoice_repository.dart';
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_concrete_invoice.dart';
 import 'package:mockito/annotations.dart';
@@ -13,13 +13,15 @@ void main() {
   late MockInvoiceRepository mockNumberTriviaRepository;
   late GetConcreteInvoice usecase;
   late String tNumber;
-  late Invoice tNumberTrivia;
+  late InvoiceEntity tNumberTrivia;
+  late Params tParams;
 
   setUp(() {
     mockNumberTriviaRepository = MockInvoiceRepository();
     usecase = GetConcreteInvoice(mockNumberTriviaRepository);
-    tNumberTrivia = const Invoice(vat: 1, invoiceId: 'test');
+    tNumberTrivia = const InvoiceEntity(vat: 1, invoiceId: 'test');
     tNumber = "1";
+    tParams = const Params(invoiceId: 'test');
   });
 
   test(
@@ -27,8 +29,7 @@ void main() {
     () async {
       //arange
 
-      when(mockNumberTriviaRepository.getConcreteInvoice(tNumber))
-          .thenAnswer((e) async {
+      when(mockNumberTriviaRepository.getConcreteInvoice(tNumber)).thenAnswer((e) async {
         return Right(tNumberTrivia);
       });
       //act
@@ -39,4 +40,20 @@ void main() {
       verifyNoMoreInteractions(mockNumberTriviaRepository);
     },
   );
+
+  group('Params() test', () {
+    test(
+      'should return a valid props',
+      () async {
+        expect(tParams.props, ['test']);
+      },
+    );
+
+    test(
+      'should return a valid invoiceId',
+      () async {
+        expect(tParams.getInvoiceId, 'test');
+      },
+    );
+  });
 }

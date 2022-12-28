@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:invoices_tdd/core/error/exceptions.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_data_source.dart';
-import 'package:invoices_tdd/features/invoice/data/models/invoice_model.dart';
+import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,7 +25,7 @@ void main() {
   });
 
   group('getLastInvoice', () {
-    final tInvoiceModel = InvoiceModel.fromJson(json.decode(fixture('invoice_cached.json')));
+    final tInvoiceModel = InvoiceDTO.fromJson(json.decode(fixture('invoice_cached.json')));
     test('should return Invoice from SharedPreferences when there is one in the cache', () async {
       //arrange
       when(mockSharedPreferences.getString(any)).thenReturn(fixture('invoice_cached.json'));
@@ -49,7 +49,7 @@ void main() {
   group('getAllInvoices', () {
 
     Map<String, dynamic> jsonDecoded = json.decode(fixture('all_invoices_cached.json'));
-    final List<InvoiceModel> tInvoiceModelList = (jsonDecoded['CACHED_INVOICES'] as List).map((element)=>InvoiceModel.fromJson(element)).toList();//.map((element) => InvoiceModel.fromJson(element)).toList();
+    final List<InvoiceDTO> tInvoiceModelList = (jsonDecoded['CACHED_INVOICES'] as List).map((element)=>InvoiceDTO.fromJson(element)).toList();//.map((element) => InvoiceDTO.fromJson(element)).toList();
     test('should return List of Invoices from SharedPreferences when there is one in the cache', () async {
       //arrange
       when(mockSharedPreferences.getString(any)).thenReturn(fixture('all_invoices_cached.json'));
@@ -71,7 +71,7 @@ void main() {
   });
 
   group('cacheInvoice', () {
-    const tInvoiceModel = InvoiceModel(vat: 1, invoiceId: "Test text");
+    const tInvoiceModel = InvoiceDTO(vat: 1, invoiceId: "Test text");
     test('should call SharedPreferences to cache the data', () async {
       //arrange
       when(mockSharedPreferences.setString(any, any))
@@ -85,7 +85,7 @@ void main() {
   });
 
   group('cacheAllInvoices', () {
-    const List<InvoiceModel> tInvoiceModelList = [InvoiceModel(vat: 1, invoiceId: "Test text"),InvoiceModel(vat: 1, invoiceId: "Test text")];
+    const List<InvoiceDTO> tInvoiceModelList = [InvoiceDTO(vat: 1, invoiceId: "Test text"),InvoiceDTO(vat: 1, invoiceId: "Test text")];
     test('should call SharedPreferences to cache the data', () async {
       //arrange
       when(mockSharedPreferences.setString(any, any))

@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:invoices_tdd/core/error/failure.dart';
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 
 abstract class InvoiceRepository{
-  Future<Either<Failure, Invoice>>? getConcreteInvoice(String invoiceId);
-  Future<Either<Failure, List<Invoice>>>? getAllInvoices();
+  Future<Either<Failure, InvoiceEntity>>? getConcreteInvoice(String invoiceId);
+  Future<Either<Failure, List<InvoiceEntity>>>? getAllInvoices();
 }

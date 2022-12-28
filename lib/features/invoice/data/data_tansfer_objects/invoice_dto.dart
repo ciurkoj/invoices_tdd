@@ -1,7 +1,7 @@
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 
-class InvoiceModel extends Invoice {
-  const InvoiceModel({required super.invoiceId, required super.vat});
+class InvoiceDTO extends InvoiceEntity {
+  const InvoiceDTO({required super.invoiceId, required super.vat});
 
   // const InvoiceModel({
   //   required String invoiceId,
@@ -11,8 +11,8 @@ class InvoiceModel extends Invoice {
   //         vat: vat,
   //       );
 
-  factory InvoiceModel.fromJson(Map<String, dynamic> json) {
-    return InvoiceModel(
+  factory InvoiceDTO.fromJson(Map<String, dynamic> json) {
+    return InvoiceDTO(
       invoiceId: json['invoiceId'],
       vat: (json['vat'] as num).toInt(),
     );

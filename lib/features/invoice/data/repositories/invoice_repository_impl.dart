@@ -4,8 +4,8 @@ import 'package:invoices_tdd/core/error/failure.dart';
 import 'package:invoices_tdd/core/network/network_info.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_data_source.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart';
-import 'package:invoices_tdd/features/invoice/data/models/invoice_model.dart';
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 import 'package:invoices_tdd/features/invoice/domain/repositories/invoice_repository.dart';
 
 class InvoiceRepositoryImpl implements InvoiceRepository{
@@ -19,20 +19,20 @@ class InvoiceRepositoryImpl implements InvoiceRepository{
     required this.networkInfo,
 });
   @override
-  Future<Either<Failure, List<Invoice>>>? getAllInvoices() async {
+  Future<Either<Failure, List<InvoiceEntity>>>? getAllInvoices() async {
     return await _getAllInvoices(() {
       return remoteDataSource.getAllInvoices();
     });
   }
 
   @override
-  Future<Either<Failure, Invoice>>? getConcreteInvoice(String invoiceId) async{
+  Future<Either<Failure, InvoiceEntity>>? getConcreteInvoice(String invoiceId) async{
     return await _getConcreteInvoice(() {
       return remoteDataSource.getConcreteInvoice(invoiceId);
     });
   }
 
-  Future<Either<Failure, Invoice>> _getConcreteInvoice(
+  Future<Either<Failure, InvoiceEntity>> _getConcreteInvoice(
       _ConcreteFromRemoteOrCache getConcreteFromRemoteOrCache) async {
     if (await networkInfo.isConnected) {
       try {
@@ -52,7 +52,7 @@ class InvoiceRepositoryImpl implements InvoiceRepository{
     }
   }
 
-  Future<Either<Failure, List<Invoice>>> _getAllInvoices(
+  Future<Either<Failure, List<InvoiceEntity>>> _getAllInvoices(
       _AllFromRemoteOrCache getAllFromRemoteOrCache) async {
     if (await networkInfo.isConnected) {
       try {
@@ -73,5 +73,5 @@ class InvoiceRepositoryImpl implements InvoiceRepository{
   }
 }
 
-typedef _ConcreteFromRemoteOrCache = Future<InvoiceModel> Function();
-typedef _AllFromRemoteOrCache = Future<List<InvoiceModel>> Function();
+typedef _ConcreteFromRemoteOrCache = Future<InvoiceDTO> Function();
+typedef _AllFromRemoteOrCache = Future<List<InvoiceDTO>> Function();

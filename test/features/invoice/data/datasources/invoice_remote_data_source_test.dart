@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:invoices_tdd/core/error/exceptions.dart';
 import 'package:invoices_tdd/core/util/constants.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart';
-import 'package:invoices_tdd/features/invoice/data/models/invoice_model.dart';
+import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -33,7 +33,7 @@ void main() {
 
   group('getConcreteInvoice', () {
     const tInvoiceId = "1";
-    final tInvoiceModel = InvoiceModel.fromJson(json.decode(fixture('invoice.json')));
+    final tInvoiceModel = InvoiceDTO.fromJson(json.decode(fixture('invoice.json')));
 
     test('should perform a GET request on a URL with invoice id being the endpoint with application/json header',
         () async {

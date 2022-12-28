@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:invoices_tdd/core/error/failure.dart';
 import 'package:invoices_tdd/core/usecases/use_case.dart';
 import 'package:invoices_tdd/core/util/input_converter.dart';
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_all_invoices.dart';
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_concrete_invoice.dart';
 import 'package:invoices_tdd/features/invoice/presentation/bloc/invoices_bloc.dart';
@@ -39,7 +39,7 @@ void main() {
   group('GetTriviaForConcreteNumber', () {
     final tInvoiceIdString = '1';
     final tInvoiceIdParsed = "1";
-    final tInvoice = const Invoice(invoiceId: 'test trivia', vat: 1);
+    final tInvoice = const InvoiceEntity(invoiceId: 'test trivia', vat: 1);
 
     void setUpMockInputConverterSuccess() =>
         when(mockInputConverter.inputToString(any)).thenReturn(Right(tInvoiceIdParsed));
@@ -134,7 +134,7 @@ void main() {
 
   group('GetTriviaForAllInvoices', () {
 
-    final tAllInvoices = const [Invoice(invoiceId: 'test trivia', vat: 1), Invoice(invoiceId: 'test trivia', vat: 1)];
+    final tAllInvoices = const [InvoiceEntity(invoiceId: 'test trivia', vat: 1), InvoiceEntity(invoiceId: 'test trivia', vat: 1)];
 
     test('should get data from the concrete usecase', () async* {
       //arrange

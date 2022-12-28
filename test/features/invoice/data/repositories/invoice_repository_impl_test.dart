@@ -4,9 +4,9 @@ import 'package:invoices_tdd/core/error/failure.dart';
 import 'package:invoices_tdd/core/network/network_info.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_data_source.dart';
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart';
-import 'package:invoices_tdd/features/invoice/data/models/invoice_model.dart';
+import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart';
 import 'package:invoices_tdd/features/invoice/data/repositories/invoice_repository_impl.dart';
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
@@ -58,8 +58,8 @@ void main() {
 
   group('getConcreteInvoice', () {
     const tInvoiceId = "1";
-    const tInvoiceModel = InvoiceModel(invoiceId: tInvoiceId, vat: 0);
-    const Invoice tInvoice = tInvoiceModel;
+    const tInvoiceModel = InvoiceDTO(invoiceId: tInvoiceId, vat: 0);
+    const InvoiceEntity tInvoice = tInvoiceModel;
 
     test('should check if the device is online', () async {
       //arrange
@@ -128,10 +128,10 @@ void main() {
   group('getALLInvoices', () {
     const tInvoiceId = "1";
     const tInvoiceModelList = [
-      InvoiceModel(invoiceId: tInvoiceId, vat: 0),
-      InvoiceModel(invoiceId: tInvoiceId, vat: 0)
+      InvoiceDTO(invoiceId: tInvoiceId, vat: 0),
+      InvoiceDTO(invoiceId: tInvoiceId, vat: 0)
     ];
-    const List<Invoice> tInvoice = tInvoiceModelList;
+    const List<InvoiceEntity> tInvoice = tInvoiceModelList;
 
     test('should check if the device is online', () async {
       //arrange

@@ -10,7 +10,7 @@ import 'dart:typed_data' as _i7;
 import 'package:http/http.dart' as _i2;
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart'
     as _i4;
-import 'package:invoices_tdd/features/invoice/data/models/invoice_model.dart'
+import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -35,8 +35,8 @@ class _FakeClient_0 extends _i1.SmartFake implements _i2.Client {
         );
 }
 
-class _FakeInvoiceModel_1 extends _i1.SmartFake implements _i3.InvoiceModel {
-  _FakeInvoiceModel_1(
+class _FakeInvoiceDTO_1 extends _i1.SmartFake implements _i3.InvoiceDTO {
+  _FakeInvoiceDTO_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -92,29 +92,28 @@ class MockInvoiceRemoteDataSourceImpl extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i5.Future<List<_i3.InvoiceModel>> getAllInvoices() => (super.noSuchMethod(
+  _i5.Future<List<_i3.InvoiceDTO>> getAllInvoices() => (super.noSuchMethod(
         Invocation.method(
           #getAllInvoices,
           [],
         ),
-        returnValue:
-            _i5.Future<List<_i3.InvoiceModel>>.value(<_i3.InvoiceModel>[]),
-      ) as _i5.Future<List<_i3.InvoiceModel>>);
+        returnValue: _i5.Future<List<_i3.InvoiceDTO>>.value(<_i3.InvoiceDTO>[]),
+      ) as _i5.Future<List<_i3.InvoiceDTO>>);
   @override
-  _i5.Future<_i3.InvoiceModel> getConcreteInvoice(String? invoiceId) =>
+  _i5.Future<_i3.InvoiceDTO> getConcreteInvoice(String? invoiceId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getConcreteInvoice,
           [invoiceId],
         ),
-        returnValue: _i5.Future<_i3.InvoiceModel>.value(_FakeInvoiceModel_1(
+        returnValue: _i5.Future<_i3.InvoiceDTO>.value(_FakeInvoiceDTO_1(
           this,
           Invocation.method(
             #getConcreteInvoice,
             [invoiceId],
           ),
         )),
-      ) as _i5.Future<_i3.InvoiceModel>);
+      ) as _i5.Future<_i3.InvoiceDTO>);
 }
 
 /// A class which mocks [Client].

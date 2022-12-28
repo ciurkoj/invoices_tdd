@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:invoices_tdd/core/error/failure.dart';
 import 'package:invoices_tdd/core/usecases/use_case.dart';
 import 'package:invoices_tdd/core/util/input_converter.dart';
-import 'package:invoices_tdd/features/invoice/domain/entities/invoice.dart';
+import 'package:invoices_tdd/features/invoice/domain/entities/invoice_entity.dart';
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_all_invoices.dart';
 import 'package:invoices_tdd/features/invoice/domain/usecases/get_concrete_invoice.dart';
 
@@ -53,7 +53,7 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
     });
   }
 
-  Stream<InvoicesState> _eitherLoadedOrErrorState(Either<Failure, Invoice> failureOrInvoice) async* {
+  Stream<InvoicesState> _eitherLoadedOrErrorState(Either<Failure, InvoiceEntity> failureOrInvoice) async* {
     yield failureOrInvoice.fold(
         (failure) => Error(message: _mapFailureToMessage(failure)), (invoice) => Loaded(invoice: [invoice]));
   }
