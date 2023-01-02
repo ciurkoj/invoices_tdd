@@ -11,6 +11,10 @@ void main() async {
   await ic.init();
   Bloc.observer = AppBlocObserver();
 
+  await Firebase.initializeApp();
+
+  final authenticationRepository = AuthenticationRepository();
+  await authenticationRepository.user.first;
   runApp(const MyApp());
 }
 
