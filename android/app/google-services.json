@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1008839721183-o7f7a8fqnpvgho7ihrp1s535j2s9r7f2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.invoices_tdd",
+            "certificate_hash": "ac50388f07ce0a666737dca59a6cfa19d6b4e439"
+          }
+        },
+        {
           "client_id": "1008839721183-7etjd2q1lh0tuhomh54e5btqc49ghhet.apps.googleusercontent.com",
           "client_type": 3
         }

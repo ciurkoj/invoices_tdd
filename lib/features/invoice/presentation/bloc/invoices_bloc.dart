@@ -45,8 +45,8 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
     });
     on<GetAllInvoicesEvent>((event, emit) async {
       emit(Loading());
-      final failureOrTrivia = await getAllInvoices(NoParams());
-      failureOrTrivia!.fold((failure) {
+      final failureOrAll = await getAllInvoices(NoParams());
+      failureOrAll!.fold((failure) {
         emit(Error(message: mapFailureToMessage(failure)));
       }, (invoices) {
         emit(Loaded( invoice:invoices ));
