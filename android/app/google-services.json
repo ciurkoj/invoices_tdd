@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1008839721183",
+    "project_id": "invoices-tdd",
+    "storage_bucket": "invoices-tdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008839721183:android:47099dfadb478349be696a",
+        "android_client_info": {
+          "package_name": "com.example.invoices_tdd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008839721183-7etjd2q1lh0tuhomh54e5btqc49ghhet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBCC1fGJsIyyJ7PePgyc-zrFkd5WwNnmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008839721183-7etjd2q1lh0tuhomh54e5btqc49ghhet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
