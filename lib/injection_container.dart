@@ -3,6 +3,8 @@ import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_da
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart';
 import 'package:invoices_tdd/features/invoice/data/repositories/invoice_repository_impl.dart';
 import 'package:invoices_tdd/features/invoice/domain/repositories/invoice_repository.dart';
+import 'package:invoices_tdd/features/invoice/domain/usecases/get_all_invoices.dart';
+import 'package:invoices_tdd/features/invoice/domain/usecases/get_concrete_invoice.dart';
 import 'package:invoices_tdd/features/invoice/presentation/bloc/invoices_bloc.dart';
 
 import 'core/network/network_info.dart';
@@ -23,8 +25,8 @@ Future<void> init() async {
       inputConverter: sl(), ));
 
   // Use cases
-  sl.registerLazySingleton(() => GetInvoiceForConcreteInvoiceId(sl()));
-  sl.registerLazySingleton(() => GetAllInvoicesEvent(sl()));
+  sl.registerLazySingleton(() => GetConcreteInvoice(sl()));
+  sl.registerLazySingleton(() => GetAllInvoices(sl()));
 
   // Repository
   sl.registerLazySingleton<InvoiceRepository>(
