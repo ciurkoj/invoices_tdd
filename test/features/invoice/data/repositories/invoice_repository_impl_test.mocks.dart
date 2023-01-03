@@ -3,15 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
 
-import 'package:invoices_tdd/core/network/network_info.dart' as _i3;
+import 'package:invoices_tdd/core/network/network_info.dart' as _i2;
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_local_data_source.dart'
     as _i6;
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart'
-    as _i5;
+    as _i4;
 import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart'
-    as _i2;
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -25,63 +25,47 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeInvoiceDTO_0 extends _i1.SmartFake implements _i2.InvoiceDTO {
-  _FakeInvoiceDTO_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i3.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i2.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<bool> get isConnected => (super.noSuchMethod(
+  _i3.Future<bool> get isConnected => (super.noSuchMethod(
         Invocation.getter(#isConnected),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
 }
 
 /// A class which mocks [InvoiceRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockInvoiceRemoteDataSource extends _i1.Mock
-    implements _i5.InvoiceRemoteDataSource {
+    implements _i4.InvoiceRemoteDataSource {
   MockInvoiceRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.InvoiceDTO> getConcreteInvoice(String? invoiceId) =>
+  _i3.Future<List<_i5.InvoiceDTO>> getConcreteInvoice(String? invoiceId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getConcreteInvoice,
           [invoiceId],
         ),
-        returnValue: _i4.Future<_i2.InvoiceDTO>.value(_FakeInvoiceDTO_0(
-          this,
-          Invocation.method(
-            #getConcreteInvoice,
-            [invoiceId],
-          ),
-        )),
-      ) as _i4.Future<_i2.InvoiceDTO>);
+        returnValue: _i3.Future<List<_i5.InvoiceDTO>>.value(<_i5.InvoiceDTO>[]),
+      ) as _i3.Future<List<_i5.InvoiceDTO>>);
   @override
-  _i4.Future<List<_i2.InvoiceDTO>> getAllInvoices() => (super.noSuchMethod(
+  _i3.Future<List<_i5.InvoiceDTO>> getAllInvoices() => (super.noSuchMethod(
         Invocation.method(
           #getAllInvoices,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.InvoiceDTO>>.value(<_i2.InvoiceDTO>[]),
-      ) as _i4.Future<List<_i2.InvoiceDTO>>);
+        returnValue: _i3.Future<List<_i5.InvoiceDTO>>.value(<_i5.InvoiceDTO>[]),
+      ) as _i3.Future<List<_i5.InvoiceDTO>>);
 }
 
 /// A class which mocks [InvoiceLocalDataSource].
@@ -94,63 +78,51 @@ class MockInvoiceLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<void>? cacheInvoice(_i2.InvoiceDTO? invoiceModel) =>
+  _i3.Future<void>? cacheInvoice(List<_i5.InvoiceDTO>? invoiceModel) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheInvoice,
           [invoiceModel],
         ),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>?);
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>?);
   @override
-  _i4.Future<void>? cacheInvoiceList(List<_i2.InvoiceDTO>? invoiceModelList) =>
+  _i3.Future<void>? cacheInvoiceList(List<_i5.InvoiceDTO>? invoiceModelList) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheInvoiceList,
           [invoiceModelList],
         ),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>?);
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>?);
 }
 
 /// A class which mocks [InvoiceRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRemoteDataSource extends _i1.Mock
-    implements _i5.InvoiceRemoteDataSource {
+    implements _i4.InvoiceRemoteDataSource {
   @override
-  _i4.Future<_i2.InvoiceDTO> getConcreteInvoice(String? invoiceId) =>
+  _i3.Future<List<_i5.InvoiceDTO>> getConcreteInvoice(String? invoiceId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getConcreteInvoice,
           [invoiceId],
         ),
-        returnValue: _i4.Future<_i2.InvoiceDTO>.value(_FakeInvoiceDTO_0(
-          this,
-          Invocation.method(
-            #getConcreteInvoice,
-            [invoiceId],
-          ),
-        )),
+        returnValue: _i3.Future<List<_i5.InvoiceDTO>>.value(<_i5.InvoiceDTO>[]),
         returnValueForMissingStub:
-            _i4.Future<_i2.InvoiceDTO>.value(_FakeInvoiceDTO_0(
-          this,
-          Invocation.method(
-            #getConcreteInvoice,
-            [invoiceId],
-          ),
-        )),
-      ) as _i4.Future<_i2.InvoiceDTO>);
+            _i3.Future<List<_i5.InvoiceDTO>>.value(<_i5.InvoiceDTO>[]),
+      ) as _i3.Future<List<_i5.InvoiceDTO>>);
   @override
-  _i4.Future<List<_i2.InvoiceDTO>> getAllInvoices() => (super.noSuchMethod(
+  _i3.Future<List<_i5.InvoiceDTO>> getAllInvoices() => (super.noSuchMethod(
         Invocation.method(
           #getAllInvoices,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.InvoiceDTO>>.value(<_i2.InvoiceDTO>[]),
+        returnValue: _i3.Future<List<_i5.InvoiceDTO>>.value(<_i5.InvoiceDTO>[]),
         returnValueForMissingStub:
-            _i4.Future<List<_i2.InvoiceDTO>>.value(<_i2.InvoiceDTO>[]),
-      ) as _i4.Future<List<_i2.InvoiceDTO>>);
+            _i3.Future<List<_i5.InvoiceDTO>>.value(<_i5.InvoiceDTO>[]),
+      ) as _i3.Future<List<_i5.InvoiceDTO>>);
 }
 
 /// A class which mocks [InvoiceLocalDataSource].
@@ -159,21 +131,21 @@ class MockRemoteDataSource extends _i1.Mock
 class MockLocalDataSource extends _i1.Mock
     implements _i6.InvoiceLocalDataSource {
   @override
-  _i4.Future<void>? cacheInvoice(_i2.InvoiceDTO? invoiceModel) =>
+  _i3.Future<void>? cacheInvoice(List<_i5.InvoiceDTO>? invoiceModel) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheInvoice,
           [invoiceModel],
         ),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>?);
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>?);
   @override
-  _i4.Future<void>? cacheInvoiceList(List<_i2.InvoiceDTO>? invoiceModelList) =>
+  _i3.Future<void>? cacheInvoiceList(List<_i5.InvoiceDTO>? invoiceModelList) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheInvoiceList,
           [invoiceModelList],
         ),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>?);
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>?);
 }

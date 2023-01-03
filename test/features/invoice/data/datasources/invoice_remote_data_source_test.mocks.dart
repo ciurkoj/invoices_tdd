@@ -4,14 +4,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
-import 'dart:convert' as _i6;
-import 'dart:typed_data' as _i7;
+import 'dart:convert' as _i7;
+import 'dart:typed_data' as _i8;
 
+import 'package:cloud_firestore/cloud_firestore.dart' as _i3;
 import 'package:http/http.dart' as _i2;
 import 'package:invoices_tdd/features/invoice/data/data_sources/invoice_remote_data_source.dart'
     as _i4;
 import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart'
-    as _i3;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -35,8 +36,9 @@ class _FakeClient_0 extends _i1.SmartFake implements _i2.Client {
         );
 }
 
-class _FakeInvoiceDTO_1 extends _i1.SmartFake implements _i3.InvoiceDTO {
-  _FakeInvoiceDTO_1(
+class _FakeCollectionReference_1<T extends Object?> extends _i1.SmartFake
+    implements _i3.CollectionReference<T> {
+  _FakeCollectionReference_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -92,28 +94,31 @@ class MockInvoiceRemoteDataSourceImpl extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i5.Future<List<_i3.InvoiceDTO>> getAllInvoices() => (super.noSuchMethod(
+  _i3.CollectionReference<Map<String, dynamic>> get collection =>
+      (super.noSuchMethod(
+        Invocation.getter(#collection),
+        returnValue: _FakeCollectionReference_1<Map<String, dynamic>>(
+          this,
+          Invocation.getter(#collection),
+        ),
+      ) as _i3.CollectionReference<Map<String, dynamic>>);
+  @override
+  _i5.Future<List<_i6.InvoiceDTO>> getAllInvoices() => (super.noSuchMethod(
         Invocation.method(
           #getAllInvoices,
           [],
         ),
-        returnValue: _i5.Future<List<_i3.InvoiceDTO>>.value(<_i3.InvoiceDTO>[]),
-      ) as _i5.Future<List<_i3.InvoiceDTO>>);
+        returnValue: _i5.Future<List<_i6.InvoiceDTO>>.value(<_i6.InvoiceDTO>[]),
+      ) as _i5.Future<List<_i6.InvoiceDTO>>);
   @override
-  _i5.Future<_i3.InvoiceDTO> getConcreteInvoice(String? invoiceId) =>
+  _i5.Future<List<_i6.InvoiceDTO>> getConcreteInvoice(String? invoiceId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getConcreteInvoice,
           [invoiceId],
         ),
-        returnValue: _i5.Future<_i3.InvoiceDTO>.value(_FakeInvoiceDTO_1(
-          this,
-          Invocation.method(
-            #getConcreteInvoice,
-            [invoiceId],
-          ),
-        )),
-      ) as _i5.Future<_i3.InvoiceDTO>);
+        returnValue: _i5.Future<List<_i6.InvoiceDTO>>.value(<_i6.InvoiceDTO>[]),
+      ) as _i5.Future<List<_i6.InvoiceDTO>>);
 }
 
 /// A class which mocks [Client].
@@ -169,7 +174,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i6.Encoding? encoding,
+    _i7.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -199,7 +204,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i6.Encoding? encoding,
+    _i7.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -229,7 +234,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i6.Encoding? encoding,
+    _i7.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -259,7 +264,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i6.Encoding? encoding,
+    _i7.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -298,7 +303,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
         returnValue: _i5.Future<String>.value(''),
       ) as _i5.Future<String>);
   @override
-  _i5.Future<_i7.Uint8List> readBytes(
+  _i5.Future<_i8.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -308,8 +313,8 @@ class MockClient extends _i1.Mock implements _i2.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<_i7.Uint8List>.value(_i7.Uint8List(0)),
-      ) as _i5.Future<_i7.Uint8List>);
+        returnValue: _i5.Future<_i8.Uint8List>.value(_i8.Uint8List(0)),
+      ) as _i5.Future<_i8.Uint8List>);
   @override
   _i5.Future<_i2.StreamedResponse> send(_i2.BaseRequest? request) =>
       (super.noSuchMethod(
