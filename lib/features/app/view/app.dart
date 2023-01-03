@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoices_tdd/features/app/bloc/app_bloc.dart';
 import 'package:invoices_tdd/features/app/routes/routes.dart';
+import 'package:invoices_tdd/appbloc_injection_container.dart';
 import 'package:invoices_tdd/theme.dart';
 
 class App extends StatelessWidget {
@@ -19,9 +20,7 @@ class App extends StatelessWidget {
     return RepositoryProvider.value(
       value: _authenticationRepository,
       child: BlocProvider(
-        create: (_) => AppBloc(
-          authenticationRepository: _authenticationRepository,
-        ),
+        create: (_) => slq<AppBloc>(),
         child: const AppView(),
       ),
     );

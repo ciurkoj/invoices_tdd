@@ -69,16 +69,16 @@ class MockGetConcreteInvoice extends _i1.Mock
         ),
       ) as _i2.InvoiceRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.InvoiceEntity>?> call(
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.InvoiceEntity>>?> call(
           _i8.Params? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue:
-            _i5.Future<_i3.Either<_i6.Failure, _i7.InvoiceEntity>?>.value(),
-      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.InvoiceEntity>?>);
+        returnValue: _i5
+            .Future<_i3.Either<_i6.Failure, List<_i7.InvoiceEntity>>?>.value(),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.InvoiceEntity>>?>);
 }
 
 /// A class which mocks [GetAllInvoices].

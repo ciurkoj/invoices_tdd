@@ -26,13 +26,13 @@ class InvoiceRepositoryImpl implements InvoiceRepository{
   }
 
   @override
-  Future<Either<Failure, InvoiceEntity>>? getConcreteInvoice(String invoiceId) async{
+  Future<Either<Failure, List<InvoiceEntity>>>? getConcreteInvoice(String invoiceId) async{
     return await _getConcreteInvoice(() {
       return remoteDataSource.getConcreteInvoice(invoiceId);
     });
   }
 
-  Future<Either<Failure, InvoiceEntity>> _getConcreteInvoice(
+  Future<Either<Failure, List<InvoiceEntity>>> _getConcreteInvoice(
       _ConcreteFromRemoteOrCache getConcreteFromRemoteOrCache) async {
     if (await networkInfo.isConnected) {
       try {
@@ -44,8 +44,8 @@ class InvoiceRepositoryImpl implements InvoiceRepository{
       }
     } else {
       try {
-        final localTrivia = await localDataSource.getLastInvoice();
-        return Right(localTrivia!);
+        final List<InvoiceDTO> localTrivia = await localDataSource.getLastInvoice() ?? [];
+        return Right(localTrivia);
       } on CacheException {
         return Left(CacheFailure());
       }
@@ -73,5 +73,5 @@ class InvoiceRepositoryImpl implements InvoiceRepository{
   }
 }
 
-typedef _ConcreteFromRemoteOrCache = Future<InvoiceDTO> Function();
+typedef _ConcreteFromRemoteOrCache = Future<List<InvoiceDTO>> Function();
 typedef _AllFromRemoteOrCache = Future<List<InvoiceDTO>> Function();

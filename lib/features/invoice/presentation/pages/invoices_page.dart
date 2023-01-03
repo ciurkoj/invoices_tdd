@@ -1,43 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoices_tdd/features/invoice/presentation/bloc/invoices_bloc.dart';
+import 'package:invoices_tdd/features/invoice/presentation/widgets/Invoice_display.dart';
+import 'package:invoices_tdd/features/invoice/presentation/widgets/loading_widget.dart';
 import 'package:invoices_tdd/features/invoice/presentation/widgets/message_display.dart';
+import 'package:invoices_tdd/features/invoice/presentation/widgets/controls.dart';
 import 'package:invoices_tdd/injection_container.dart';
 
-class InvoicesPage extends StatefulWidget {
-  const InvoicesPage({super.key});
-
-  @override
-  InvoicesPageState createState() => InvoicesPageState();
-}
-
-class InvoicesPageState extends State<InvoicesPage> {
-  bool isLoading = false;
-  String? searchByValue;
-
-  TextEditingController editingController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+class NumberTriviaPage extends StatelessWidget {
+  const NumberTriviaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Invoices'),
-      ),
-      body: buildBody(context),
-    );
-  }
-
-  BlocProvider<InvoicesBloc> buildBody(BuildContext context) {
     return BlocProvider(
       create: (_) => sl<InvoicesBloc>(),
       child: Center(
@@ -50,13 +24,14 @@ class InvoicesPageState extends State<InvoicesPage> {
               BlocBuilder<InvoicesBloc, InvoicesState>(
                 builder: (context, state) {
                   if (state is Empty) {
+                    context.read<InvoicesBloc>().add(GetAllInvoicesEvent());
                     return const MessageDisplay(
                       message: 'Start searching!',
                     );
                   } else if (state is Loading) {
-                    // return LoadingWidget();
+                    return const LoadingWidget();
                   } else if (state is Loaded) {
-                    // return InvoiceDisplay(invoice: state.invoice.first);
+                    return InvoiceDisplay(invoices: state.invoice);
                   } else if (state is Error) {
                     return MessageDisplay(
                       message: state.message,
@@ -67,7 +42,8 @@ class InvoicesPageState extends State<InvoicesPage> {
                   );
                 },
               ),
-              // SizedBox(height: 20),
+              const SizedBox(height: 20),
+              const Controls()
               // Bottom half
             ],
           ),

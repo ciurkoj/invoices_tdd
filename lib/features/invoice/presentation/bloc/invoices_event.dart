@@ -14,9 +14,4 @@ class GetInvoiceForConcreteInvoiceId extends InvoicesEvent{
   const GetInvoiceForConcreteInvoiceId(this.invoiceId);
 }
 
-class GetAllInvoicesEvent extends InvoicesEvent{
-  final List<InvoiceEntity> invoices;
-  List<InvoiceEntity> get getInvoices => invoices;
-
-  const GetAllInvoicesEvent(this.invoices);
-}
+class GetAllInvoicesEvent extends InvoicesEvent{}

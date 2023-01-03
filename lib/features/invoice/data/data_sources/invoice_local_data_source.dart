@@ -10,8 +10,8 @@ abstract class InvoiceLocalDataSource{
   /// user had an internet connection.
   ///
   /// Throws [CacheException] if no cached data is present.
-  Future<InvoiceDTO>? getLastInvoice();
-  Future<void>? cacheInvoice(InvoiceDTO invoiceModel);
+  Future<List<InvoiceDTO>>? getLastInvoice();
+  Future<void>? cacheInvoice(List<InvoiceDTO> invoiceModel);
   Future<List<InvoiceDTO>>? getAllCachedInvoices();
   Future<void>? cacheInvoiceList(List<InvoiceDTO> invoiceModelList);
 }
@@ -28,18 +28,18 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
   InvoiceLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<void>? cacheInvoice(InvoiceDTO invoiceModelToCache) {
+  Future<void>? cacheInvoice(List<InvoiceDTO> invoiceModelToCache) {
     var x = sharedPreferences.setString("ASDF", "asdf");
     x;
     return sharedPreferences.setString(
-        CACHED_LAST_INVOICE, json.encode(invoiceModelToCache.toJson()));
+        CACHED_LAST_INVOICE, json.encode(invoiceModelToCache.map((e) => e.toJson()).toList()));
   }
 
   @override
-  Future<InvoiceDTO>? getLastInvoice() {
+  Future<List<InvoiceDTO>>? getLastInvoice() {
     final jsonString = sharedPreferences.getString(CACHED_LAST_INVOICE);
     if (jsonString != null) {
-      return Future.value(InvoiceDTO.fromJson(json.decode(jsonString)));
+      return Future.value([InvoiceDTO.fromJson(json.decode(jsonString))]);
     } else {
       throw CacheException();
     }

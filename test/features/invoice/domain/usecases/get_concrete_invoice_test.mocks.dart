@@ -33,10 +33,10 @@ class MockInvoiceRepository extends _i1.Mock implements _i2.InvoiceRepository {
   }
 
   @override
-  _i3.Future<_i4.Either<_i5.Failure, _i6.InvoiceEntity>>? getConcreteInvoice(
-          String? invoiceId) =>
-      (super.noSuchMethod(Invocation.method(
-        #getConcreteInvoice,
-        [invoiceId],
-      )) as _i3.Future<_i4.Either<_i5.Failure, _i6.InvoiceEntity>>?);
+  _i3.Future<_i4.Either<_i5.Failure, List<_i6.InvoiceEntity>>>?
+      getConcreteInvoice(String? invoiceId) =>
+          (super.noSuchMethod(Invocation.method(
+            #getConcreteInvoice,
+            [invoiceId],
+          )) as _i3.Future<_i4.Either<_i5.Failure, List<_i6.InvoiceEntity>>>?);
 }

@@ -1,15 +1,17 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:invoices_tdd/core/error/exceptions.dart';
-import 'package:invoices_tdd/core/util/constants.dart';
+import 'package:invoices_tdd/features/app/app.dart';
 import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart';
 import 'package:http/http.dart' as http;
+import 'package:invoices_tdd/appbloc_injection_container.dart';
 
-abstract class InvoiceRemoteDataSource{
+abstract class InvoiceRemoteDataSource {
   /// Calls the  {...} endpoint
   ///
   /// Throws a [ServerException] for all error codes
-  Future<InvoiceDTO> getConcreteInvoice(String invoiceId);
+  Future<List<InvoiceDTO>> getConcreteInvoice(String invoiceId);
 
   /// Calls the  {...} endpoint
   ///
@@ -17,40 +19,32 @@ abstract class InvoiceRemoteDataSource{
   Future<List<InvoiceDTO>> getAllInvoices();
 }
 
-
 class InvoiceRemoteDataSourceImpl implements InvoiceRemoteDataSource {
   late final http.Client client;
+  final collection = FirebaseFirestore.instance
+      .collection('users')
+      .doc(slq<AppBloc>().state.user.id)
+      .collection("invoices");
 
   InvoiceRemoteDataSourceImpl({required this.client});
 
-  Future<InvoiceDTO> _getInvoiceFromUrl(String url) async {
-    final response = await client
-        .get(Uri.parse(url), headers: {'Content-Type': 'application/json'});
-    if (response.statusCode == 200) {
-      return const InvoiceDTO(invoiceId: '1',vat:1);
-    } else {
-      throw ServerException();
-    }
-  }
-  Future<List<InvoiceDTO>> _getAllInvoicesFromUrl(String url) async {
-    final response = await client
-        .get(Uri.parse(url), headers: {'Content-Type': 'application/json'});
-    if (response.statusCode == 200) {
-      return [const InvoiceDTO(invoiceId: '1',vat:1),const InvoiceDTO(invoiceId: '1',vat:1)];
-    } else {
-      throw ServerException();
-    }
+
+  @override
+  Future<List<InvoiceDTO>> getAllInvoices() async {
+    QuerySnapshot querySnapshot = await collection.get();
+
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    return allData.map((e) => InvoiceDTO.fromJson(e as Map<String, dynamic>)).toList();
   }
 
   @override
-  Future<List<InvoiceDTO>> getAllInvoices() {
-    // TODO: implement getAllInvoices with the correct Url
-    return _getAllInvoicesFromUrl('${Constants.URL}/random');
-  }
+  Future<List<InvoiceDTO>> getConcreteInvoice(String invoiceId) async {
+    var invoice =
+        await collection.where("invoiceId", isEqualTo: invoiceId).get().then((value) => value);
 
-  @override
-  Future<InvoiceDTO> getConcreteInvoice(String invoiceId) {
-    // TODO: implement getConcreteInvoice with the correct Url
-    return _getInvoiceFromUrl('${Constants.URL}/$invoiceId');
+    final allData = invoice.docs.map((doc) => doc.data()).toList();
+
+    return allData.map((e) => InvoiceDTO.fromJson(e)).toList();
   }
 }

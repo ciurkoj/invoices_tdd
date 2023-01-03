@@ -26,7 +26,10 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
 
   InvoicesState get initialState => Empty();
 
-  InvoicesBloc({required GetConcreteInvoice concrete, required GetAllInvoices all, required this.inputConverter})
+  InvoicesBloc(
+      {required GetConcreteInvoice concrete,
+      required GetAllInvoices all,
+      required this.inputConverter})
       : assert(concrete != null),
         assert(all != null),
         assert(inputConverter != null),
@@ -37,10 +40,10 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
       final inputEither = inputConverter.inputToString(event.invoiceId);
       inputEither.fold((failure) {
         emit(const Error(message: INVALID_INPUT_FAILURE_MESSAGE));
-      }, (invoiceId) async* {
+      }, (invoiceId) async {
         emit(Loading());
         final failureOrInvoice = await getConcreteInvoice(Params(invoiceId: invoiceId));
-        yield* eitherLoadedOrErrorState(failureOrInvoice!);
+        return eitherLoadedOrErrorState(failureOrInvoice!);
       });
     });
     on<GetAllInvoicesEvent>((event, emit) async {
@@ -49,15 +52,20 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
       failureOrAll!.fold((failure) {
         emit(Error(message: mapFailureToMessage(failure)));
       }, (invoices) {
-        emit(Loaded( invoice:invoices ));
+        emit(Loaded(invoice: invoices));
       });
     });
   }
 
   @visibleForTesting
-  Stream<InvoicesState> eitherLoadedOrErrorState(Either<Failure, InvoiceEntity> failureOrInvoice) async* {
-    yield failureOrInvoice.fold(
-        (failure) => Error(message: mapFailureToMessage(failure)), (invoice) => Loaded(invoice: [invoice]));
+  eitherLoadedOrErrorState(Either<Failure, List<InvoiceEntity>> failureOrInvoice) {
+    return failureOrInvoice.fold((failure) => Error(message: mapFailureToMessage(failure)),
+            (invoice) {
+          if (invoice.isEmpty) {
+            return emit(const Error(message: "No matching results found"));
+          }
+          return emit(Loaded(invoice: invoice));
+        });
   }
 
   @visibleForTesting

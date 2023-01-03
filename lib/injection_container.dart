@@ -20,21 +20,23 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //! Features - NumberTrivia
   sl.registerFactory(() => InvoicesBloc(
-      concrete: sl(),
-      all: sl(),
-      inputConverter: sl(), ));
+        concrete: sl(),
+        all: sl(),
+        inputConverter: sl(),
+      ));
+
 
   // Use cases
   sl.registerLazySingleton(() => GetConcreteInvoice(sl()));
   sl.registerLazySingleton(() => GetAllInvoices(sl()));
 
   // Repository
-  sl.registerLazySingleton<InvoiceRepository>(
-      () => InvoiceRepositoryImpl(
-            remoteDataSource: sl(),
-            localDataSource: sl(),
-            networkInfo: sl(),
-          ));
+  sl.registerLazySingleton<InvoiceRepository>(() => InvoiceRepositoryImpl(
+        remoteDataSource: sl(),
+        localDataSource: sl(),
+        networkInfo: sl(),
+      ));
+
   // Data sources
   sl.registerLazySingleton<InvoiceRemoteDataSource>(
       () => InvoiceRemoteDataSourceImpl(client: sl()));

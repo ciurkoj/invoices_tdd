@@ -73,7 +73,7 @@ void main() {
     runTestsOnline(() {
       test('should return remote data when the call to remote data source is successful', () async {
         //arrange
-        when(mockRemoteDataSource.getConcreteInvoice(any)).thenAnswer((_) async => tInvoiceModel);
+        when(mockRemoteDataSource.getConcreteInvoice(any)).thenAnswer((_) async => [tInvoiceModel]);
         //act
         final result = await repositoryImpl.getConcreteInvoice(tInvoiceId);
         //assert
@@ -82,12 +82,12 @@ void main() {
       });
       test('should cache the data locally when the call to remote data source is successful', () async {
         //arrange
-        when(mockRemoteDataSource.getConcreteInvoice(any)).thenAnswer((_) async => tInvoiceModel);
+        when(mockRemoteDataSource.getConcreteInvoice(any)).thenAnswer((_) async => [tInvoiceModel]);
         //act
         await repositoryImpl.getConcreteInvoice(tInvoiceId);
         //assert
         verify(mockRemoteDataSource.getConcreteInvoice(tInvoiceId));
-        verify(mockLocalDataSource.cacheInvoice(tInvoiceModel));
+        verify(mockLocalDataSource.cacheInvoice([tInvoiceModel]));
       });
       test('should return serverfailure when the call to remote data source is successful', () async {
         //arrange
@@ -104,7 +104,7 @@ void main() {
     runTestsOffline(() {
       test('should return last locally cached data when the cached data is present', () async {
         //arrange
-        when(mockLocalDataSource.getLastInvoice()).thenAnswer((_) async => tInvoiceModel);
+        when(mockLocalDataSource.getLastInvoice()).thenAnswer((_) async => [tInvoiceModel]);
         //act
         final result = await repositoryImpl.getConcreteInvoice(tInvoiceId);
         //assert

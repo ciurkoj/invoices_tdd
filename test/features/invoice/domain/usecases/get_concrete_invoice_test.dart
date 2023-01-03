@@ -31,7 +31,7 @@ void main() {
       //arange
 
       when(mockNumberTriviaRepository.getConcreteInvoice(tNumber)).thenAnswer((e) async {
-        return Right(tNumberTrivia);
+        return Right([tNumberTrivia]);
       });
       //act
       final result = await usecase(Params(invoiceId: tNumber));

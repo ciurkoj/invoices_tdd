@@ -9,7 +9,7 @@ void main() {
   setUp(() {
     tInvoiceEntity = const InvoiceEntity(invoiceId: 'test', vat: 0);
     tGetInvoiceForConcreteInvoiceId = const GetInvoiceForConcreteInvoiceId("test");
-    tGetAllInvoicesEvent = GetAllInvoicesEvent([tInvoiceEntity]);
+    tGetAllInvoicesEvent = GetAllInvoicesEvent();
   });
 
   group('NoParams() test', () {
@@ -22,7 +22,7 @@ void main() {
     test(
       'should return a valid invoiceId',
           () async {
-        expect(tGetAllInvoicesEvent.getInvoices, [tInvoiceEntity]);
+        expect(tGetAllInvoicesEvent, [tInvoiceEntity]);
       },
     );
     test(

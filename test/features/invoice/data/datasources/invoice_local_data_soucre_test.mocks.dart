@@ -217,7 +217,7 @@ class MockInvoiceLocalDataSourceImpl extends _i1.Mock
         ),
       ) as _i2.SharedPreferences);
   @override
-  _i3.Future<void>? cacheInvoice(_i5.InvoiceDTO? invoiceModelToCache) =>
+  _i3.Future<void>? cacheInvoice(List<_i5.InvoiceDTO>? invoiceModelToCache) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheInvoice,

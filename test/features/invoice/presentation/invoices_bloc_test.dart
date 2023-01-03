@@ -68,7 +68,7 @@ void main() {
     test('should get data from the concrete usecase', () async* {
       //arrange
       setUpMockInputConverterSuccess();
-      when(mockGetConcreteInvoice(any)).thenAnswer((_) async => const Right(tInvoice));
+      when(mockGetConcreteInvoice(any)).thenAnswer((_) async => const Right([tInvoice]));
       //act
       bloc.add(GetInvoiceForConcreteInvoiceId(tInvoiceIdString));
       await untilCalled(mockGetConcreteInvoice(any));
@@ -80,7 +80,7 @@ void main() {
     test('should emits [Loading, Loaded] when data is gotten successfully', () async* {
       //arrange
       setUpMockInputConverterSuccess();
-      when(mockGetConcreteInvoice(any)).thenAnswer((_) async => const Right(tInvoice));
+      when(mockGetConcreteInvoice(any)).thenAnswer((_) async => const Right([tInvoice]));
 
       //assert later
       final expected = [
@@ -129,7 +129,7 @@ void main() {
       //arrange
       when(mockGetAllInvoices(any)).thenAnswer((_) async => const Right(tAllInvoices));
       //act
-      bloc.add(const GetAllInvoicesEvent(tAllInvoices));
+      bloc.add(GetAllInvoicesEvent());
       await untilCalled(mockGetAllInvoices(any));
 
       //assert
@@ -144,7 +144,7 @@ void main() {
       final expeted = [Empty(), Loading(), const Loaded(invoice: tAllInvoices)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
-      bloc.add(const GetAllInvoicesEvent(tAllInvoices));
+      bloc.add( GetAllInvoicesEvent());
     });
 
     test('should emits [Loading, Error] when getting data fails', () async* {
@@ -155,7 +155,7 @@ void main() {
       final expeted = [Empty(), Loading(), const Error(message: SERVER_FAILURE_MESSAGE)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
-      bloc.add(const GetAllInvoicesEvent(tAllInvoices));
+      bloc.add( GetAllInvoicesEvent());
     });
 
     test('should emits [Loading, Error] with a proper message for the error when getting data fails', () async* {
@@ -166,13 +166,13 @@ void main() {
       final expeted = [Empty(), Loading(), const Error(message: CACHE_FAILURE_MESSAGE)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
-      bloc.add(const GetAllInvoicesEvent(tAllInvoices));
+      bloc.add( GetAllInvoicesEvent());
     });
   });
   group("test helper methods of InvoicesBloc", () {
     test('test eitherLoadedOrErrorState() ', () {
       expect(
-        bloc.eitherLoadedOrErrorState(const Right(tInvoice)),
+        bloc.eitherLoadedOrErrorState(const Right([tInvoice])),
         emitsInOrder([
           const Loaded(invoice: [tInvoice]),
           emitsDone

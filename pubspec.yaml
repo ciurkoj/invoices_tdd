@@ -50,12 +50,15 @@ dependencies:
   firebase_core: ^2.4.1
   authentication_repository:
     path: packages/authentication_repository
+  cache:
+    path: packages/cache
   form_inputs:
     path: packages/form_inputs
   flow_builder: ^0.0.9
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.3.0
   firebase_auth_platform_interface: ^6.11.7
+  cloud_firestore: ^4.3.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -77,7 +77,7 @@ void main() {
       when(mockSharedPreferences.setString(any, any))
           .thenAnswer((_) async => true);
       //act
-      dataSource.cacheInvoice(tInvoiceModel);
+      dataSource.cacheInvoice([tInvoiceModel]);
       //assert
       final expectedJsonString = json.encode(tInvoiceModel.toJson());
       verify(mockSharedPreferences.setString(CACHED_LAST_INVOICE, expectedJsonString));
