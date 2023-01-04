@@ -7,8 +7,8 @@ import 'package:invoices_tdd/features/invoice/presentation/widgets/message_displ
 import 'package:invoices_tdd/features/invoice/presentation/widgets/controls.dart';
 import 'package:invoices_tdd/injection_container.dart';
 
-class NumberTriviaPage extends StatelessWidget {
-  const NumberTriviaPage({super.key});
+class InvoicesPage extends StatelessWidget {
+  InvoicesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,8 @@ class NumberTriviaPage extends StatelessWidget {
                     );
                   } else if (state is Loading) {
                     return const LoadingWidget();
+                  } else if (state is LoadedSuccess) {
+                    return InvoiceDisplay(invoices: state.invoice);
                   } else if (state is Loaded) {
                     return InvoiceDisplay(invoices: state.invoice);
                   } else if (state is Error) {

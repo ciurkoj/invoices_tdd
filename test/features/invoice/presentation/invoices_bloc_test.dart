@@ -57,7 +57,7 @@ void main() {
 
       final expected = [
         Empty(),
-        const Error(message: INVALID_INPUT_FAILURE_MESSAGE),
+         Error(message: INVALID_INPUT_FAILURE_MESSAGE),
       ];
       //assert later
       expectLater(bloc, emitsInOrder(expected));
@@ -86,7 +86,7 @@ void main() {
       final expected = [
         Empty(),
         Loading(),
-        const Loaded(invoice: [tInvoice])
+         Loaded(invoice: [tInvoice])
       ];
       expectLater(bloc, emitsInOrder(expected));
 
@@ -100,7 +100,7 @@ void main() {
       when(mockGetConcreteInvoice(any)).thenAnswer((_) async => Left(ServerFailure()));
 
       //assert later
-      final expeted = [Empty(), Loading(), const Error(message: SERVER_FAILURE_MESSAGE)];
+      final expeted = [Empty(), Loading(),  Error(message: SERVER_FAILURE_MESSAGE)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
       bloc.add(GetInvoiceForConcreteInvoiceId(tInvoiceIdString));
@@ -112,7 +112,7 @@ void main() {
       when(mockGetConcreteInvoice(any)).thenAnswer((_) async => Left(CacheFailure()));
 
       //assert later
-      final expeted = [Empty(), Loading(), const Error(message: CACHE_FAILURE_MESSAGE)];
+      final expeted = [Empty(), Loading(),  Error(message: CACHE_FAILURE_MESSAGE)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
       bloc.add(GetInvoiceForConcreteInvoiceId(tInvoiceIdString));
@@ -141,7 +141,7 @@ void main() {
       when(mockGetAllInvoices(any)).thenAnswer((_) async => const Right(tAllInvoices));
 
       //assert later
-      final expeted = [Empty(), Loading(), const Loaded(invoice: tAllInvoices)];
+      final expeted = [Empty(), Loading(),  Loaded(invoice: tAllInvoices)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
       bloc.add( GetAllInvoicesEvent());
@@ -152,7 +152,7 @@ void main() {
       when(mockGetAllInvoices(any)).thenAnswer((_) async => Left(ServerFailure()));
 
       //assert later
-      final expeted = [Empty(), Loading(), const Error(message: SERVER_FAILURE_MESSAGE)];
+      final expeted = [Empty(), Loading(),  Error(message: SERVER_FAILURE_MESSAGE)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
       bloc.add( GetAllInvoicesEvent());
@@ -163,7 +163,7 @@ void main() {
       when(mockGetAllInvoices(any)).thenAnswer((_) async => Left(CacheFailure()));
 
       //assert later
-      final expeted = [Empty(), Loading(), const Error(message: CACHE_FAILURE_MESSAGE)];
+      final expeted = [Empty(), Loading(),  Error(message: CACHE_FAILURE_MESSAGE)];
       expectLater(bloc, emitsInOrder(expeted));
       //act
       bloc.add( GetAllInvoicesEvent());
@@ -174,7 +174,7 @@ void main() {
       expect(
         bloc.eitherLoadedOrErrorState(const Right([tInvoice])),
         emitsInOrder([
-          const Loaded(invoice: [tInvoice]),
+           Loaded(invoice: [tInvoice]),
           emitsDone
         ]),
       );

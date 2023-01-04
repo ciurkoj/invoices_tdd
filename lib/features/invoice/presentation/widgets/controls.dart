@@ -13,7 +13,7 @@ class Controls extends StatefulWidget {
 
 class _ControlsState extends State<Controls> {
   final controller = TextEditingController();
-  late String inputStr;
+   String? inputStr;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,8 @@ class _ControlsState extends State<Controls> {
           onChanged: (value) {
             inputStr = value;
           },
-          onSubmitted: (_) {
-            dispatchConcrete();
+          onSubmitted: (value) {
+            dispatchConcrete(value);
           },
         ),
         const SizedBox(height: 10),
@@ -42,7 +42,7 @@ class _ControlsState extends State<Controls> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(foregroundColor:  Theme.of(context).primaryColor,
                 ),
-                onPressed: dispatchConcrete,
+                onPressed:()=> dispatchConcrete(controller.value.text),
                 child: const Text('Search by invoiceId'),
               ),
             ),
@@ -59,10 +59,10 @@ class _ControlsState extends State<Controls> {
     );
   }
 
-  void dispatchConcrete() {
+  void dispatchConcrete(value) {
     controller.clear();
     BlocProvider.of<InvoicesBloc>(context)
-        .add(GetInvoiceForConcreteInvoiceId(inputStr));
+        .add(GetInvoiceForConcreteInvoiceId(value));
   }
 
   void dispatchRandom() {

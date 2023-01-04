@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
           Text(user.email ?? '', style: textTheme.headlineSmall),
           const SizedBox(height: 4),
           Text(user.name ?? '', style: textTheme.headlineMedium),
-          const NumberTriviaPage()
+          InvoicesPage()
         ],
       ),
     );

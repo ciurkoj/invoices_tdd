@@ -15,3 +15,13 @@ class GetInvoiceForConcreteInvoiceId extends InvoicesEvent{
 }
 
 class GetAllInvoicesEvent extends InvoicesEvent{}
+
+class _InvoicesLoaded extends InvoicesEvent {
+  const _InvoicesLoaded(this.loadedState);
+
+  /// The current tick count.
+  final InvoicesState loadedState;
+
+  @override
+  List<Object> get props => [loadedState];
+}
