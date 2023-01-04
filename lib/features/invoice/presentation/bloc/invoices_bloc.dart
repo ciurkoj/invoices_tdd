@@ -49,6 +49,7 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
     });
 
     on<GetInvoiceForConcreteInvoiceId>((event, emit)  async {
+      emit(Loading());
       final inputEither = inputConverter.inputToString(event.invoiceId);
       if(inputEither.isRight()){
         final failureOrInvoice = await getConcreteInvoice(Params(invoiceId: event.invoiceId));
