@@ -47,7 +47,7 @@ void main() {
       await tester.pumpWidget(
         App(authenticationRepository: authenticationRepository),
       );
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.byType(AppView), findsOneWidget);
     });
   });
