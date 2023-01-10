@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoices_tdd/features/app/app.dart';
 import 'package:invoices_tdd/features/home/home.dart';
@@ -11,8 +12,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:invoices_tdd/injection_container.dart' as ic;
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 
-import 'firebase_test.dart';
+
 
 class MockUser extends Mock implements User {}
 
@@ -91,4 +93,12 @@ void main() {
       expect(find.byType(HomePage), findsOneWidget);
     });
   });
+}
+
+typedef Callback = void Function(MethodCall call);
+
+void setupFirebaseAuthMocks([Callback? customHandlers]) {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  setupFirebaseCoreMocks();
 }

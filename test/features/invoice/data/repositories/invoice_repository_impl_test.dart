@@ -76,9 +76,10 @@ void main() {
         when(mockRemoteDataSource.getConcreteInvoice(any)).thenAnswer((_) async => [tInvoiceModel]);
         //act
         final result = await repositoryImpl.getConcreteInvoice(tInvoiceId);
+        var foldedResult= result?.fold((failure) => failure, (result) => result);
         //assert
         verify(mockRemoteDataSource.getConcreteInvoice(tInvoiceId));
-        expect(result, equals(const Right(tInvoice)));
+        expect(foldedResult, equals([tInvoice]));
       });
       test('should cache the data locally when the call to remote data source is successful', () async {
         //arrange
@@ -107,10 +108,11 @@ void main() {
         when(mockLocalDataSource.getLastInvoice()).thenAnswer((_) async => [tInvoiceModel]);
         //act
         final result = await repositoryImpl.getConcreteInvoice(tInvoiceId);
+        var foldedResult= result?.fold((failure) => failure, (result) => result);
         //assert
         verifyZeroInteractions(mockRemoteDataSource);
         verify(mockLocalDataSource.getLastInvoice());
-        expect(result, equals(const Right(tInvoice)));
+        expect(foldedResult, equals([tInvoice]));
       });
       test('should return CacheFailure when there is no cached data present', () async {
         //arrange

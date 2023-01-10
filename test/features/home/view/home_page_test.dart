@@ -10,7 +10,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:invoices_tdd/injection_container.dart' as ic;
 
-import '../../app/view/firebase_test.dart';
+import '../../app/view/app_test.dart';
 
 class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {}
 
@@ -42,6 +42,7 @@ void main() {
             child: const MaterialApp(home: HomePage()),
           ),
         );
+        await tester.pumpAndSettle();
         await tester.tap(find.byKey(logoutButtonKey));
         verify(() => appBloc.add(const AppLogoutRequested())).called(1);
       });

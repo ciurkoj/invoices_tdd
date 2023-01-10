@@ -29,8 +29,6 @@ class InvoiceLocalDataSourceImpl implements InvoiceLocalDataSource {
 
   @override
   Future<void>? cacheInvoice(List<InvoiceDTO> invoiceModelToCache) {
-    var x = sharedPreferences.setString("ASDF", "asdf");
-    x;
     return sharedPreferences.setString(
         CACHED_LAST_INVOICE, json.encode(invoiceModelToCache.map((e) => e.toJson()).toList()));
   }

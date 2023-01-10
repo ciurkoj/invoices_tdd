@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:invoices_tdd/core/error/exceptions.dart';
 import 'package:invoices_tdd/features/invoice/data/data_tansfer_objects/invoice_dto.dart';
-import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class InvoiceRemoteDataSource {
@@ -19,13 +18,12 @@ abstract class InvoiceRemoteDataSource {
 }
 
 class InvoiceRemoteDataSourceImpl implements InvoiceRemoteDataSource {
-  late final http.Client client;
   final collection = FirebaseFirestore.instance
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser?.uid)
       .collection("invoices");
 
-  InvoiceRemoteDataSourceImpl({required this.client});
+  InvoiceRemoteDataSourceImpl();
 
   @override
   Future<List<InvoiceDTO>> getAllInvoices() async {

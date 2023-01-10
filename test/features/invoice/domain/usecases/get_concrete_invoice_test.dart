@@ -35,8 +35,9 @@ void main() {
       });
       //act
       final result = await usecase(Params(invoiceId: tNumber));
+      var foldedResult= result?.fold((failure) => failure, (result) => result);
       //assert
-      expect(result, equals(Right(tNumberTrivia)));
+      expect(foldedResult,  equals([tNumberTrivia]));
       verify(mockNumberTriviaRepository.getConcreteInvoice(tNumber));
       verifyNoMoreInteractions(mockNumberTriviaRepository);
     },

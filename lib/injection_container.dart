@@ -39,7 +39,7 @@ Future<void> init() async {
 
   // Data sources
   sl.registerLazySingleton<InvoiceRemoteDataSource>(
-      () => InvoiceRemoteDataSourceImpl(client: sl()));
+      () => InvoiceRemoteDataSourceImpl());
 
   sl.registerLazySingleton<InvoiceLocalDataSource>(
       () => InvoiceLocalDataSourceImpl(sharedPreferences: sl()));
