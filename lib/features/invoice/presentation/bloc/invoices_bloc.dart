@@ -37,7 +37,6 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
         getConcreteInvoice = concrete,
         getAllInvoices = all,
         super(Empty()) {
-
     on<GetAllInvoicesEvent>((event, emit) async {
       emit(Loading());
       final failureOrAll = await getAllInvoices(NoParams());
@@ -48,17 +47,17 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
       });
     });
 
-    on<GetInvoiceForConcreteInvoiceId>((event, emit)  async {
+    on<GetInvoiceForConcreteInvoiceId>((event, emit) async {
       emit(Loading());
       final inputEither = inputConverter.inputToString(event.invoiceId);
-      if(inputEither.isRight()){
+      if (inputEither.isRight()) {
         final failureOrInvoice = await getConcreteInvoice(Params(invoiceId: event.invoiceId));
         await emit.onEach<InvoicesState>(eitherLoadedOrErrorState(failureOrInvoice!),
             onData: (invoice) async {
-              emit(Loading());
-              add(_InvoicesLoaded(invoice));
-            });
-      }else{
+          emit(Loading());
+          add(_InvoicesLoaded(invoice));
+        });
+      } else {
         emit(Error(message: INVALID_INPUT_FAILURE_MESSAGE));
       }
     });
@@ -68,14 +67,13 @@ class InvoicesBloc extends Bloc<InvoicesEvent, InvoicesState> {
   @visibleForTesting
   Stream<InvoicesState> eitherLoadedOrErrorState(
       Either<Failure, List<InvoiceEntity>> failureOrInvoice) async* {
-    yield* failureOrInvoice.fold(
-            (failure) => Stream.value(Error(message: mapFailureToMessage(failure))),
-            (invoice) {
-          if (invoice.isEmpty) {
-            return Stream.value(const Error(message: NO_MATCHING_RESULTS_FOUND));
-          }
-          return Stream.value(Loaded(invoice: invoice));
-        });
+    yield* failureOrInvoice
+        .fold((failure) => Stream.value(Error(message: mapFailureToMessage(failure))), (invoice) {
+      if (invoice.isEmpty) {
+        return Stream.value(const Error(message: NO_MATCHING_RESULTS_FOUND));
+      }
+      return Stream.value(Loaded(invoice: invoice));
+    });
   }
 
   @visibleForTesting

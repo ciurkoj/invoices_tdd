@@ -1,19 +1,26 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoices_tdd/features/app/app.dart';
 import 'package:invoices_tdd/features/home/home.dart';
+import 'package:invoices_tdd/features/invoice/presentation/bloc/invoices_bloc.dart';
 import 'package:invoices_tdd/features/login/login.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:invoices_tdd/injection_container.dart' as ic;
 import 'package:mocktail/mocktail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'firebase_test.dart';
 
 class MockUser extends Mock implements User {}
 
-class MockAuthenticationRepository extends Mock
-    implements AuthenticationRepository {}
+class MockAuthenticationRepository extends Mock implements AuthenticationRepository {}
 
 class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {}
+
+class MockInvoicesBloc extends MockBloc<InvoicesEvent, InvoicesState> implements InvoicesBloc {}
 
 void main() {
   group('App', () {
@@ -33,6 +40,10 @@ void main() {
     });
 
     testWidgets('renders AppView', (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      await ic.init();
+      setupFirebaseAuthMocks();
+      await Firebase.initializeApp();
       await tester.pumpWidget(
         App(authenticationRepository: authenticationRepository),
       );
